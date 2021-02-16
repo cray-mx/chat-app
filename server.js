@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const socket = require('socket.io');
-const bodyParser = require('body-parser'); 
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 let credentials = [];
 
@@ -29,18 +30,27 @@ app.post('/create', (req, res) => {
 
   const addUser = () => {
       credentials.push({
-      id: req.body.id,
+      email: req.body.email,
       name: req.body.name,
       password: req.body.password
     });
   }
 
-  if(credentials.find(user => user.id === req.body.id))
+  if(credentials.find(user => user.email == req.body.email))
       res.json(false);
   else{
     addUser();
     res.json(true);
   }
+});
+
+app.post('/login',(req, res) => {
+  const value = credentials.find(cred => cred.email === req.body.email && cred.password === req.body.password);
+  console.log(value);
+  if(value)
+    res.json(value);
+  else
+    res.json(false);
 });
 
 io.on('connection', (socket) => {

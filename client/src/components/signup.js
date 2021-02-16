@@ -1,31 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Container, Form, Button, Row, Col} from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
 
 export default function signup(){
 
-    const [idCheck, setIdCheck] = useState('');
-    const [copy, setCopy] = useState('Copy');
+    const [emailCheck, setEmailCheck] = useState('');
+    const [password, passwordCheck] = useState('');
+
+    const history = useHistory();
     
-    const idRef = useRef();
+    const emailRef = useRef();
     const nameRef = useRef();
     const passwordRef = useRef();
-
-    useEffect(() => {
-        idRef.current.value = uuidv4();
-    },[]);
-
-    const changeId = () => {
-        setCopy('Copy');
-        idRef.current.value = uuidv4();
-    };
+    const confirmPasswordRef = useRef();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        fetch('http://192.168.15.5:5000/create',{
+        if(passwordRef.current.value === confirmPasswordRef.current.value){
+
+            fetch('http://192.168.15.5:5000/create',{
             method: 'POST',
             body: JSON.stringify({
-                id: idRef.current.value,
+                email: emailRef.current.value,
                 name: nameRef.current.value, 
                 password: passwordRef.current.value}),
             headers: {
@@ -35,20 +31,17 @@ export default function signup(){
         })
         .then(res => res.json())
         .then(data => {
-            console.log("In .then clause");
             if(data)
-                window.location.href = "/";
+                history.push("/login");
             else{
-                setIdCheck('Id is already in use');
+                setEmailCheck('Email is already in use');
             }
         })
         .catch(err => console.log("ERROR"));
     }
-
-    const copyHandler = (e) => {
-        idRef.current.select();
-        document.execCommand('copy');
-        setCopy('Copied!');
+    else{
+        passwordCheck("Password does not match");
+    }
     }
 
     return (
@@ -59,11 +52,10 @@ export default function signup(){
                 <h1>Sign-up</h1> 
                     <Form.Group className="mt-5">
                         <Form.Label>
-                            <h5>Choose Id</h5>
+                            <h5>Enter Email</h5>
                         </Form.Label>
-                        <Form.Control type="text" placeholder="unique-id" ref={idRef} required/>
-                        <Button className="mt-2" onClick={copyHandler} variant="warning">{copy}</Button>         
-                        <Form.Text>{idCheck}</Form.Text>
+                        <Form.Control type="email" placeholder="email" ref={emailRef} required/>
+                        <Form.Text style={{ color: "red"}}>{emailCheck}</Form.Text>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
@@ -76,13 +68,18 @@ export default function signup(){
                             <h5>Enter Password</h5>
                         </Form.Label>
                         <Form.Control className="mb-2" type="password" placeholder="password" ref={passwordRef} required/>
-                        <Form.Text >Make sure you copy your id for login later on </Form.Text>
                     </Form.Group>
-                    <Button type="submit">Sign-up</Button>
-                    <Button className="ml-3 w-50" variant="success" onClick={changeId}>Change Id</Button>
+                    <Form.Group>
+                        <Form.Label>
+                            <h5>Confirm Password</h5>
+                        </Form.Label>
+                        <Form.Control className="mb-2" type="password" placeholder="confirm password" ref={confirmPasswordRef} required/>
+                        <Form.Text style={{ color: "red"}}>{password}</Form.Text>
+                    </Form.Group>
+                        <Button className="button w-25" variant="success" type="submit">Sign-up</Button>
                 </Form>
                 </Col>
             </Row>
         </Container>
     )
-}
+    }

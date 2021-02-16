@@ -1,10 +1,10 @@
 import React from 'react';
 
-
 export default function chat() {
+
     return (
         <div>
-            Hello 
+            <h2>Welcome {localStorage.getItem('name')}</h2> 
         </div>
     )
 }

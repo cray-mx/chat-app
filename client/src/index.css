@@ -2,3 +2,16 @@ body{
   background-color: rgb(40, 44, 52);
   color: rgb(228, 239, 248);
 }
+
+.modaltitle{
+  color: rgb(226, 19, 19);
+}
+
+.modalbody{
+  color: black;
+}
+
+.button{
+  margin: auto;
+  display: block;
+}
