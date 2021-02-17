@@ -15,3 +15,9 @@ body{
   margin: auto;
   display: block;
 }
+
+.notfound{
+  text-align: center;
+  color: rgb(207, 39, 39);
+}
+

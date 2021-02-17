@@ -1,23 +1,25 @@
 {
   "name": "chatapp",
   "version": "1.0.0",
-  "description": "Starter kit for creating React and Express apps",
+  "description": "Chat app with MERN",
   "main": "server.js",
   "scripts": {
-    "client-install": "cd client && npm install",
+    "client-install": "cd ../client && npm install",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "client": "cd ../client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author": "Brad Traversy",
+  "author": "Rayaan Hussain",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^1.14.6"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "concurrently": "^3.5.1",
+    "dotenv": "^8.2.0",
     "express": "^4.16.2",
     "mongoose": "^5.11.16",
     "socket.io": "^3.1.1"

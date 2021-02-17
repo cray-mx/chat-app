@@ -4,7 +4,7 @@ export default function chat() {
 
     return (
         <div>
-            <h2>Welcome {localStorage.getItem('name')}</h2> 
+            <h2 style={{textAlign: "center"}}>Welcome {localStorage.getItem('name')}</h2> 
         </div>
     )
 }

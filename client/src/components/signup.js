@@ -49,7 +49,7 @@ export default function signup(){
         <Row className="justify-content-center" >
         <Col className="col-md-6 ">
             <Form className="mt-5" onSubmit={submitHandler}>
-                <h1>Sign-up</h1> 
+                <h1 style={{textAlign: "center", color:"rgb(194, 188, 188)"}}>Sign-up</h1> 
                     <Form.Group className="mt-5">
                         <Form.Label>
                             <h5>Enter Email</h5>

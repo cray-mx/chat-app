@@ -63,7 +63,7 @@ export default function Login() {
             <Row className="justify-content-center">
                 <Col className="col-md-4 ">
                     <Form className="mt-5" onSubmit={submitHandler}>
-                        <h1>Login</h1> 
+                        <h1 style={{textAlign: "center", color:"rgb(194, 188, 188)"}}>Login</h1> 
                         <Form.Group className="mt-5">
                             <Form.Label>
                                 <h5>Enter Email</h5>
