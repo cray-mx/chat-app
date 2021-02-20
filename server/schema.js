@@ -12,6 +12,12 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    contacts: {
+        type: []
+    },
+    conversations: {
+        type: [[]]
     }
 }, {timestamps: true});
 

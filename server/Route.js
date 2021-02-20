@@ -52,4 +52,38 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.post('/createContact',(req, res) => {
+
+    User.findOne({email: req.body.contact.myEmail})
+    .then(doc => {
+        const existingEmail = doc.contacts.find(contact => contact.email === req.body.contact.email);
+        User.exists({email: req.body.contact.email})
+        .then(data => {
+            if(!existingEmail && data){
+                doc.contacts.push({
+                    name: req.body.contact.name,
+                    email: req.body.contact.email
+                })
+                doc.save().then(data => res.json(data));
+            }
+            else
+                res.json(false);
+            })
+        .catch(err => res.json(false));  
+        })
+    .catch(err => res.json(false));
+});
+
+router.post('/createConversation', (req, res) => {
+
+    User.findOne({email: req.body.conversation.email})
+    .then(doc => {
+        doc.conversations = req.body.conversation.conversations;
+        doc.save()
+        .then(data => res.json(data))
+        .catch(err => res.json(false));
+    })
+    .catch(err => res.json(false));
+})
+
 module.exports = { router };

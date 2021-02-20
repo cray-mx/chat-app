@@ -1,6 +1,6 @@
 import React, {useContext}from 'react';
 import { Route , Redirect} from 'react-router-dom';
-import { UserContext } from './userContext';
+import { UserContext } from './contexts/userContext';
 
 function privateRoute({component: Component, ...rest}) {
 
@@ -8,7 +8,7 @@ function privateRoute({component: Component, ...rest}) {
 
     return (
         <Route {...rest} render={props => {
-            return user || localStorage.getItem('name') ? <Component /> : <Redirect to="/login" />
+            return user || localStorage.getItem('details') ? <Component /> : <Redirect to="/login" />
             }
         }/>
     )

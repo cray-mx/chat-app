@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext} from 'react';
 import { Container, Form, Button, Row, Col, Modal} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from './userContext';
+import { UserContext } from './contexts/userContext';
 
 export default function Login() {
 
@@ -29,8 +29,8 @@ export default function Login() {
         .then(data => {
             if(data){
                 setUser(data.name);
-                if(!localStorage.getItem('name') || localStorage.getItem('name') !== data.name)
-                    localStorage.setItem('name', data.name);
+                if(!localStorage.getItem('details') || JSON.parse(localStorage.getItem('details')) !== data)
+                    localStorage.setItem('details', JSON.stringify(data));
                 history.push("/");
             }
             else{

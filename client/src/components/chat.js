@@ -1,10 +1,13 @@
 import React from 'react';
+import Sidebar from './chat/sidebar';
 
-export default function chat() {
+export default function Chat() {
 
     return (
-        <div>
-            <h2 style={{textAlign: "center"}}>Welcome {localStorage.getItem('name')}</h2> 
-        </div>
+        <div className="chat">
+            <div className="d-flex" style={{height: '100vh'}}>
+                <Sidebar />
+            </div>
+        </div> 
     )
 }
