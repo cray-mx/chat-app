@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './login';
 import Signup from './signup';
@@ -10,11 +10,6 @@ import { UserContext } from './contexts/userContext';
 function App() {
 
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    if(localStorage.getItem('details'))
-      setUser(JSON.parse(localStorage.getItem('details')));
-  },[]);
 
   return (
     <UserContext.Provider value={{user, setUser}}>

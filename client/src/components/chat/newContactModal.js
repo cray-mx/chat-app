@@ -9,7 +9,9 @@ export default function NewContactModal({ closeModal }) {
 
     const [contactValid, setContactValid] = useState('');
 
-    const {user, setUser} = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
+
+    const data = JSON.parse(localStorage.getItem('details'));
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -19,7 +21,7 @@ export default function NewContactModal({ closeModal }) {
                 contact: {
                     name: nameRef.current.value,
                     email: emailRef.current.value,
-                    myEmail: user.email
+                    myEmail: data.email
                 }
             }),
             headers: {
@@ -56,7 +58,7 @@ export default function NewContactModal({ closeModal }) {
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" ref={nameRef} required/>
                     </Form.Group>
-                    <Button variant="warning" type="submit">Create</Button>
+                    <Button variant="success" type="submit">Create</Button>
                     <p className="pt-2" style={{color:"red"}}>{contactValid}</p>
                  </Form>
              </Modal.Body>

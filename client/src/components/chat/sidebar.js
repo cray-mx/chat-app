@@ -37,6 +37,9 @@ function Sidebar() {
                 <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '12px'}}>
                     Your Email: <span className="text-muted">{data.email}</span>
                 </div>
+                <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '12px'}}>
+                    Your Name: <span className="text-muted">{data.name}</span>
+                </div>
                 <Button className="rounded-0" variant="success" onClick={() => setModalOpen(true)}>
                     New {conversationsOpen ? 'Conversation' : 'Contact'}
                 </Button>

@@ -3,6 +3,12 @@ const router = express.Router();
 const User = require('./schema');
 const bcrypt = require('bcrypt');
 
+router.post('/getData', async (req, res) => {
+    User.findOne({email: req.body.email})
+    .then(doc => res.json(doc))
+    .catch(err => res.json(false));  
+});
+
 router.post('/create', async (req, res) => {
 
     const createUser = async () => {
@@ -84,6 +90,6 @@ router.post('/createConversation', (req, res) => {
         .catch(err => res.json(false));
     })
     .catch(err => res.json(false));
-})
+});
 
 module.exports = { router };

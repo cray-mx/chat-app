@@ -1,41 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
-body{
+body {
   background-color: rgb(40, 44, 52);
   color: rgb(228, 239, 248);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.modaltitle{
+.modaltitle {
   color: rgb(226, 19, 19);
 }
 
-.modalbody{
+.modalbody {
   color: black;
 }
 
-.button{
+.button {
   margin: auto;
   display: block;
 }
 
-.notfound{
+.notfound {
   text-align: center;
   color: rgb(207, 39, 39);
 }
 
-.chat{
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: white;
-    z-index: 10;
-    font-family: sans-serif;
-    color: black;
+.chat {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 10;
+  font-family: sans-serif;
+  color: black;
 }
 
-.contact-names{
+.contact-names {
   list-style: none;
-  
+}
+
+.msg-box:focus {
+  outline: none;
+  box-shadow: none;
 }

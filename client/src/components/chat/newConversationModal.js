@@ -23,33 +23,37 @@ export default function NewConversationModal({closeModal}) {
   
   const submitHandler = (e) => {
     e.preventDefault();
-    if(data.conversations)
-      data.conversations = [...data.conversations, selectedContacts];
-    else
-      data.conversations = [selectedContacts];
+      let a = JSON.stringify(data.conversations);
+      let b = JSON.stringify(selectedContacts);
+      let c = a.indexOf(b);
+      if(c === -1){
+        data.conversations = [...data.conversations, selectedContacts];
+        if(selectedContacts.length>0){
 
-    fetch('http://192.168.15.5:5000/createConversation',{
-      method: 'POST',
-      body: JSON.stringify({
-          conversation: {
-              conversations: data.conversations,
-              email: data.email
-          }
-      }),
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      mode: 'cors'
-    })
-    .then(res => res.json())
-    .then(data => {
-      const val = JSON.stringify(data);
-      localStorage.setItem('details', val);
-      setUser(val);
-      setSelectedContacts([]);
-      closeModal();
-    })
-    .catch(err => console.log("Error in creating conversation"));
+          fetch('http://192.168.15.5:5000/createConversation',{
+            method: 'POST',
+            body: JSON.stringify({
+                conversation: {
+                    conversations: data.conversations,
+                    email: data.email
+                }
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+          })
+          .then(res => res.json())
+          .then(data => {
+            const val = JSON.stringify(data);
+            localStorage.setItem('details', val);
+            setUser(val);
+            setSelectedContacts([]);
+            closeModal();
+          })
+          .catch(err => console.log("Error in creating conversation"));
+        }
+      }
   }
 
     return (
@@ -69,7 +73,7 @@ export default function NewConversationModal({closeModal}) {
                     />
                 </Form.Group>
               ))}
-              <Button variant="warning" type="submit">Create</Button>
+              <Button variant="success" type="submit">Create</Button>
             </Form>
           </Modal.Body>
         </div>

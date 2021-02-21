@@ -5,14 +5,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { router } = require('./Route');
 require('dotenv').config();
-
-let server;
+const User = require('./schema');
 
 mongoose.connect(process.env.CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 .then(res => {
-    console.log("Connected to db");
-    server = app.listen(5000, () => console.log("Server started at port 5000"));
-});
+    console.log("Connected to Database");
+})
+.catch(err => console.log('Could not connect to Database'));
+
+const server = app.listen(5000, () => console.log("Server started at port 5000"));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -25,3 +26,30 @@ app.use((req, res, next) => {
 });
 
 app.use('/', router);
+
+//SOCKET CODE
+
+const io = socket(server, {
+  cors: {
+    origin: '*',
+  }
+});
+
+io.on('connection', socket => {
+  console.log("Client has connected");
+
+  socket.on('join', msgObject => {
+      socket.join(msgObject.senderEmail);
+  });
+
+  socket.on('client-msg', msg => {
+      msg.conversations.forEach(recipient => {
+        io.to(recipient.email).emit('server-msg', msg)
+      });
+      io.to(msg.senderEmail).emit('server-msg', msg);
+  })
+});
+
+
+
+
