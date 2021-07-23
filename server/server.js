@@ -36,15 +36,14 @@ const io = socket(server, {
 });
 
 io.on('connection', socket => {
-  console.log("Client has connected");
-
+  
   socket.on('join', msgObject => {
       socket.join(msgObject.senderEmail);
   });
 
   socket.on('client-msg', msg => {
       msg.conversations.forEach(recipient => {
-        io.to(recipient.email).emit('server-msg', msg)
+        io.to(recipient.email).emit('server-msg', msg);
       });
       io.to(msg.senderEmail).emit('server-msg', msg);
   })

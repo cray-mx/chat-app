@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
-import {Tab, Nav, Button, Modal} from 'react-bootstrap';
+import {Tab, Nav, Modal} from 'react-bootstrap';
 import Conversations from './conversations';
 import Contacts from './contacts';
 import NewContactModal from './newContactModal';
 import NewConversationModal from './newConversationModal';
+import {Button} from '@material-ui/core';
+import MessageIcon from '@material-ui/icons/Message';
+import ContactsIcon from '@material-ui/icons/Contacts';
 
 function Sidebar() {
     const data = JSON.parse(localStorage.getItem('details'));
@@ -34,13 +37,13 @@ function Sidebar() {
                         <Contacts />
                     </Tab.Pane>
                 </Tab.Content>
-                <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '12px'}}>
-                    Your Email: <span className="text-muted">{data.email}</span>
+                <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '14px'}}>
+                    Your Name - <span className="text-muted">{data.name}</span>
                 </div>
-                <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '12px'}}>
-                    Your Name: <span className="text-muted">{data.name}</span>
+                <div className="p-2 border-top border-right small font-weight-bold" style={{fontSize: '14px'}}>
+                    Your Email - <span className="text-muted">{data.email}</span>
                 </div>
-                <Button className="rounded-0" variant="success" onClick={() => setModalOpen(true)}>
+                <Button className="rounded-0" variant="contained" color="primary" endIcon={conversationsOpen ? <MessageIcon /> : <ContactsIcon />} onClick={() => setModalOpen(true)}>
                     New {conversationsOpen ? 'Conversation' : 'Contact'}
                 </Button>
             </Tab.Container>

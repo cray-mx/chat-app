@@ -18,6 +18,9 @@ const userSchema = mongoose.Schema({
     },
     conversations: {
         type: [[]]
+    },
+    messages: {
+        type: []
     }
 }, {timestamps: true});
 

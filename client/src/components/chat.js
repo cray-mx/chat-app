@@ -28,7 +28,6 @@ export default function Chat() {
             if(data){
             const val = JSON.stringify(data);
             localStorage.setItem('details', val);
-            console.log(val);
             setUser(val);
         }})
         .catch(err => console.log("Error in fetching latest info"));

@@ -9,11 +9,11 @@ function contacts() {
            {data.contacts.map((contact,i) => (
                <ListGroup.Item key={i} className="contact-names">
                {contact.name}
-               <p style={{fontFamily: 'Roboto'}}>{contact.email}</p>
+               <div style={{fontFamily: 'Roboto'}}>{contact.email}</div>
                </ListGroup.Item>
            ))}
         </ListGroup>
     )
 }
 
-export default contacts
+export default contacts;
